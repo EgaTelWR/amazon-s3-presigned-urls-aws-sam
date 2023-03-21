@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
-Description: S3 Uploader - sample application
+Description: S3 Uploader, S3 events go to SQS
 
 Resources:
   # HTTP API
@@ -51,10 +51,16 @@ Resources:
             Method: get
             ApiId: !Ref MyApi  
 
-  ## S3 bucket
+  ## S3 Staging Bucket
   S3UploadBucket:
     Type: AWS::S3::Bucket
+    DependsOn:
+      - QueuePolicy
     Properties:
+      NotificationConfiguration:
+        QueueConfigurations:
+          - Event: 's3:ObjectCreated:*'
+            Queue: !GetAtt StandardQueue.Arn
       CorsConfiguration:
         CorsRules:
         - AllowedHeaders:
@@ -66,6 +72,47 @@ Resources:
           AllowedOrigins:
             - "*"
 
+  ## S3 Customer Documents Bucket. Final Bucket
+  S3CustomerDocumentsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - "*"
+            AllowedMethods:
+              - GET
+              - PUT
+              - HEAD
+            AllowedOrigins:
+              - "*"
+
+  ## A SQS Policy that allows for receiving events emitted by S3UploadBucket
+  QueuePolicy:
+    Type: 'AWS::SQS::QueuePolicy'
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: "s3.amazonaws.com"
+            Action:
+              - 'SQS:SendMessage'
+            Resource: !GetAtt StandardQueue.Arn
+            Condition:
+              ArnLike:
+                aws:SourceArn: "arn:aws:s3:::*"   # it should be sth like -> !Join ["",['arn:aws:s3:::',!Ref SourceBucketName]] or !GetAtt S3UploadBucket.Arn
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+      Queues:
+        - !Ref StandardQueue
+
+  # A SQS that keeps all events emitted by S3 bucket
+  StandardQueue:
+    Type: AWS::SQS::Queue
+
+
 ## Take a note of the outputs for deploying the workflow templates in this sample application
 Outputs:
   APIendpoint:
@@ -74,4 +121,6 @@ Outputs:
   S3UploadBucketName:
     Description: "S3 bucket for application uploads"
     Value: !Ref 'S3UploadBucket'    
-
+  S3CustomerDocumentsBucket:
+    Description: "S3 bucket that contains Customer Documents"
+    Value: !Ref 'S3CustomerDocumentsBucket'
