@@ -1,0 +1,63 @@
+2023-03-22T11:07:41.796Z	77fed714-9939-5ba7-9f23-8b807a8afc07	INFO	{
+    "Records": [
+        {
+            "messageId": "928ec4da-a11a-4f41-a1fd-7a481be69e99",
+            "receiptHandle": "AQEB2moqiXt4/J/ay2aexRvNm/QlU7gyS3RSNrnSHmYTfMng6cBMnN3Ycv7ed1UJFHBYLddcMCtf9RBAy45Gx1+AnJKOw9rxG8AZERgbC1f2LwQ1IX7aCO3PW40t8OV3K4GXw3j3G6K3vnh9whQtoo233K2QUDzAPUC+nq06rgPzpLi5867mX+r5mXnHYHXPLIxnD6vkNJPQZa3qCkl9zf6A13MhXQsj6RpFYZRd0yvlRbqiHdXpVWFqzCkfsbjVZA5Yp0eNtHHmhLmsjZg4VVClSeyGFX+JrTayoO0v5wOiPKcfY2GWrdJ5hiwUZ2Kl8yHnD6AW5PyyhSEdpiLP5yOEhrHa4ulvA4DPEX6LTxe7sssVNcsPIHkY9uVKBwh+CTu+XYOXhcrqidYF2+x6FEMUj745j0kPwulrEbaB0bo0Py0=",
+            "body": "{\"Records\":[{\"eventVersion\":\"2.1\",\"eventSource\":\"aws:s3\",\"awsRegion\":\"eu-central-1\",\"eventTime\":\"2023-03-22T11:07:40.441Z\",\"eventName\":\"ObjectCreated:Put\",\"userIdentity\":{\"principalId\":\"AWS:AROAW7WJJZAQQXMZYBOEY:s3uploader-UploadRequestFunction-EWsQ9DJ6cEvF\"},\"requestParameters\":{\"sourceIPAddress\":\"54.86.50.139\"},\"responseElements\":{\"x-amz-request-id\":\"VCQTZX5XGHS5QMXP\",\"x-amz-id-2\":\"4s2/yrgTQwiX5zay+vkgIEm+mZ88bBt0X6vtQoS52neJodXuUSz8U9TLm96CYgWSceS0LjPm19gKzpgHBcDiQGHNQ4SKhRQT\"},\"s3\":{\"s3SchemaVersion\":\"1.0\",\"configurationId\":\"85245ac6-4330-480c-8c23-60e6cf7acffb\",\"bucket\":{\"name\":\"s3uploader-s3uploadbucket-1qr897ghxpel6\",\"ownerIdentity\":{\"principalId\":\"AE5X8WV72MRGD\"},\"arn\":\"arn:aws:s3:::s3uploader-s3uploadbucket-1qr897ghxpel6\"},\"object\":{\"key\":\"6406049.jpg\",\"size\":55383,\"eTag\":\"a17e702eebc7bc74ef412221aa7064c0\",\"sequencer\":\"00641AE17C60901080\"}}}]}",
+            "attributes": {
+                "ApproximateReceiveCount": "1",
+                "SentTimestamp": "1679483261103",
+                "SenderId": "AIDAIZRJAGH76OE2BC64E",
+                "ApproximateFirstReceiveTimestamp": "1679483261123"
+            },
+            "messageAttributes": {},
+            "md5OfBody": "3469749578a5ca4f8110cb8d3e5a169d",
+            "eventSource": "aws:sqs",
+            "eventSourceARN": "arn:aws:sqs:eu-central-1:480384763937:s3uploader-StandardQueue-LH7NZvmEFOtq",
+            "awsRegion": "eu-central-1"
+        }
+    ]
+}
+
+Records
+{"Records":[{"eventVersion":"2.1","eventSource":"aws:s3","awsRegion":"eu-central-1","eventTime":"2023-03-22T11:07:40.441Z","eventName":"ObjectCreated:Put","userIdentity":{"principalId":"AWS:AROAW7WJJZAQQXMZYBOEY:s3uploader-UploadRequestFunction-EWsQ9DJ6cEvF"},"requestParameters":{"sourceIPAddress":"54.86.50.139"},"responseElements":{"x-amz-request-id":"VCQTZX5XGHS5QMXP","x-amz-id-2":"4s2/yrgTQwiX5zay+vkgIEm+mZ88bBt0X6vtQoS52neJodXuUSz8U9TLm96CYgWSceS0LjPm19gKzpgHBcDiQGHNQ4SKhRQT"},"s3":{"s3SchemaVersion":"1.0","configurationId":"85245ac6-4330-480c-8c23-60e6cf7acffb","bucket":{"name":"s3uploader-s3uploadbucket-1qr897ghxpel6","ownerIdentity":{"principalId":"AE5X8WV72MRGD"},"arn":"arn:aws:s3:::s3uploader-s3uploadbucket-1qr897ghxpel6"},"object":{"key":"6406049.jpg","size":55383,"eTag":"a17e702eebc7bc74ef412221aa7064c0","sequencer":"00641AE17C60901080"}}}]}
+
+as JSON
+{
+  "Records": [
+    {
+      "eventVersion": "2.1",
+      "eventSource": "aws:s3",
+      "awsRegion": "eu-central-1",
+      "eventTime": "2023-03-22T11:07:40.441Z",
+      "eventName": "ObjectCreated:Put",
+      "userIdentity": {
+        "principalId": "AWS:AROAW7WJJZAQQXMZYBOEY:s3uploader-UploadRequestFunction-EWsQ9DJ6cEvF"
+      },
+      "requestParameters": {
+        "sourceIPAddress": "54.86.50.139"
+      },
+      "responseElements": {
+        "x-amz-request-id": "VCQTZX5XGHS5QMXP",
+        "x-amz-id-2": "4s2/yrgTQwiX5zay+vkgIEm+mZ88bBt0X6vtQoS52neJodXuUSz8U9TLm96CYgWSceS0LjPm19gKzpgHBcDiQGHNQ4SKhRQT"
+      },
+      "s3": {
+        "s3SchemaVersion": "1.0",
+        "configurationId": "85245ac6-4330-480c-8c23-60e6cf7acffb",
+        "bucket": {
+          "name": "s3uploader-s3uploadbucket-1qr897ghxpel6",
+          "ownerIdentity": {
+            "principalId": "AE5X8WV72MRGD"
+          },
+          "arn": "arn:aws:s3:::s3uploader-s3uploadbucket-1qr897ghxpel6"
+        },
+        "object": {
+          "key": "6406049.jpg",
+          "size": 55383,
+          "eTag": "a17e702eebc7bc74ef412221aa7064c0",
+          "sequencer": "00641AE17C60901080"
+        }
+      }
+    }
+  ]
+}
