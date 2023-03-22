@@ -23,6 +23,7 @@ Resources:
   ## Lambda functions
   UploadRequestFunction:
     # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    # A function to get the URL that can be used for uploading the file by the end user
     Type: AWS::Serverless::Function 
     Properties:
       CodeUri: getSignedURL/
@@ -50,6 +51,35 @@ Resources:
             Path: /uploads
             Method: get
             ApiId: !Ref MyApi  
+
+  MoveCustomerObject:
+    # This function triggered by the SQS when a new S3:Event comes in.
+    # Function does:
+    # 1. Goes to the UploadBucket
+    # 2. Mark the object as 'In Review' - as Label
+    # 3. Copy the Object into the CustomerDocumentsBucket
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: moveCustomerObject/
+      Handler: app.handler
+      Runtime: nodejs16.x
+      Timeout: 3
+      MemorySize: 128
+      Environment:
+        Variables:
+          UploadBucket: !Ref S3UploadBucket
+          CustomerDocumentsBucket: !Ref S3CustomerDocumentsBucket
+      Policies:
+        #- S3WritePolicy:
+        #    BucketName: !Ref S3CustomerDocumentsBucket
+        - SQSPollerPolicy:
+            QueueName: !GetAtt StandardQueue.QueueName
+      Events:
+        aSQSEvent:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt StandardQueue.Arn
+            BatchSize: 1
 
   ## S3 Staging Bucket
   S3UploadBucket:
